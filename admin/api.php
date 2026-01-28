@@ -1,8 +1,7 @@
 <?php
-/**
- * API Quản lý và Kích hoạt Key (CronOS Engine)
- * Đảm bảo file này được host trên server hỗ trợ PHP.
- */
+ //  Share Source by PQM
+ // Tham gia giao lưu, trao đổi và hỗ trợ tại Discord:
+ // https://discord.gg/Bjb7EvsA 
 
 // Tên file lưu trữ dữ liệu (nên đổi tên khó đoán hoặc chặn truy cập direct)
 $storage_file = 'data_keys_secure.json';
