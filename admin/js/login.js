@@ -3,8 +3,8 @@ function handleLogin() {
     const pass = document.getElementById('password').value;
     const error = document.getElementById('error');
 
-    // Mật khẩu mặc định: qminh1404
-    if (user === 'admin' && pass === 'qminh1404') {
+    const hashedPassword = md5(pass);
+    if (user === 'admin' && hashedPassword === '823f4cfe556f95863e2df595c02b432f') {
         sessionStorage.setItem('admin_logged_in', 'true');
         window.location.href = 'index.html';
     } else {
@@ -25,7 +25,7 @@ if (togglePassword && passwordInput) {
     });
 }
 
-// Nhấn Enter để đăng nhập
+// Nhấn Enter để đăng nhập 
 document.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') handleLogin();
 });
