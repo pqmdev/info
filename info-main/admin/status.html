@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Thống kê Hệ thống - CronOS</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #0a0a0c;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            background: #121216;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #23232d;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            width: 300px;
+        }
+
+        h2 {
+            color: #00a3ff;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .stat {
+            font-size: 1.1em;
+            margin: 15px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .live {
+            color: #00ff9d;
+            font-weight: bold;
+        }
+
+        .expired {
+            color: #ff3250;
+            font-weight: bold;
+        }
+
+        .loading {
+            opacity: 0.5;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card" id="main-card">
+        <h2>CRONOS STATUS</h2>
+        <div id="loader" class="loading">Đang tải dữ liệu...</div>
+        <div id="stats-content" style="display: none;">
+            <div class="stat">Tổng số Key: <strong id="total-count">0</strong></div>
+            <div class="stat">Đang hoạt động: <span class="live" id="live-count">0</span></div>
+            <div class="stat">Đã hết hạn: <span class="expired" id="expired-count">0</span></div>
+            <hr style="border: 0; border-top: 1px solid #23232d; margin: 20px 0;">
+            <div style="font-size: 0.8em; opacity: 0.5;">Cập nhật: <span id="update-time">--:--</span></div>
+        </div>
+    </div>
+
+    <script>
+        // Đường dẫn đến file json trên github của bạn
+        const DATA_URL = 'keys.json';
+
+        async function loadStats() {
+            try {
+                const response = await fetch(DATA_URL + '?t=' + Date.now());
+                const keys = await response.json();
+
+                const now = Date.now();
+                let live = 0;
+                let expired = 0;
+
+                keys.forEach(k => {
+                    if (k.expires > now) live++; else expired++;
+                });
+
+                document.getElementById('total-count').innerText = keys.length;
+                document.getElementById('live-count').innerText = live;
+                document.getElementById('expired-count').innerText = expired;
+                document.getElementById('update-time').innerText = new Date().toLocaleTimeString();
+
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('stats-content').style.display = 'block';
+            } catch (error) {
+                document.getElementById('loader').innerText = 'Lỗi tải dữ liệu. Hãy đảm bảo file keys.json tồn tại.';
+                document.getElementById('loader').style.color = '#ff3250';
+            }
+        }
+
+        loadStats();
+        // Tự động cập nhật mỗi 30 giây
+        setInterval(loadStats, 30000);
+    </script>
+</body>
+
+</html>

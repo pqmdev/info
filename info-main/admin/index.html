@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Quản Lý Key</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        body {
+            padding-top: 40px;
+        }
+
+        .admin-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .stat-card h4 {
+            font-size: 0.9em;
+            opacity: 0.7;
+            margin-bottom: 10px;
+        }
+
+        .stat-card .value {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .search-box {
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .search-box input {
+            width: 100%;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 12px 20px;
+            border-radius: 12px;
+            color: var(--text-primary);
+        }
+
+        /* Dropdown Actions Styling */
+        .action-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: var(--card-bg);
+            min-width: 180px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
+            z-index: 100;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .dropdown-content a {
+            color: var(--text-primary);
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+            font-size: 0.9em;
+            transition: all 0.2s;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .dropdown-content a:hover {
+            background-color: rgba(167, 139, 250, 0.1);
+            color: var(--accent-color);
+        }
+
+        .dropdown-content a i {
+            width: 20px;
+            margin-right: 8px;
+            opacity: 0.8;
+        }
+
+        .dropdown-content .delete-opt:hover {
+            background-color: rgba(255, 118, 117, 0.1);
+            color: var(--danger);
+        }
+
+        .show {
+            display: block;
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+    <script src="../resources/verified.js"></script>
+</head>
+
+<body>
+
+    <div class="admin-wrapper">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <a href="../index.html" style="color: var(--accent-color); text-decoration: none; display: inline-block;">
+                <i class="fas fa-arrow-left"></i> Quay lại trang chủ
+            </a>
+            <button class="btn btn-danger" onclick="handleLogout()" style="padding: 8px 15px; font-size: 0.85em;">
+                <i class="fas fa-sign-out-alt"></i> Đăng xuất
+            </button>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card" onclick="window.location.href='key.html'"
+                style="cursor: pointer; border-color: var(--accent-color); background: rgba(167, 139, 250, 0.1);">
+                <h4>Quản lý Key chuyên sâu</h4>
+                <div class="value"><i class="fas fa-key"></i></div>
+                <p style="font-size: 0.8em; margin-top: 5px; opacity: 0.7;">Tới Trung tâm Key & API</p>
+            </div>
+            <div class="stat-card">
+                <h4>Key đang Live</h4>
+                <div class="value" id="live-keys" style="color: var(--success);">0</div>
+            </div>
+            <div class="stat-card">
+                <h4>Key hết hạn</h4>
+                <div class="value" id="expired-keys" style="color: var(--danger);">0</div>
+            </div>
+        </div>
+
+        <div class="modal-content admin-main-panel"
+            style="display: block; position: static; width: 100%; margin: 0 auto;">
+            <div class="admin-header">
+                <div class="admin-title">
+                    <h2><i class="fas fa-user-gear"></i> Quản Trị Hệ Thống</h2>
+                    <span class="admin-info">Admin: Phạm Quang Minh <img src="../resources/tick_0.png"
+                            class="verified-tick-img" alt="verified"></span>
+                </div>
+                <div class="admin-actions">
+                    <button class="btn btn-clean" onclick="deleteExpiredKeys()">
+                        <i class="fas fa-broom"></i> Dọn dẹp
+                    </button>
+                    <button class="btn btn-primary" onclick="exportKeys()">
+                        <i class="fas fa-download"></i> Xuất Key
+                    </button>
+                </div>
+            </div>
+
+            <div class="key-form">
+                <input type="text" id="key-user" placeholder="Nhập tên người dùng hoặc Ghi chú...">
+                <select id="key-time">
+                    <option value="1">1 Giờ</option>
+                    <option value="24">1 Ngày</option>
+                    <option value="168">7 Ngày</option>
+                    <option value="720">30 Ngày</option>
+                    <option value="8760">1 Năm</option>
+                    <option value="999999">Vĩnh viễn</option>
+                </select>
+                <button class="btn btn-primary" onclick="addKey()">
+                    <i class="fas fa-plus"></i> Thêm Key
+                </button>
+            </div>
+
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Tìm kiếm key hoặc user..." onkeyup="filterKeys()">
+            </div>
+
+            <div class="key-table-container">
+                <table class="key-table">
+                    <thead>
+                        <tr>
+                            <th>User/ID</th>
+                            <th>Mã Key Code</th>
+                            <th>Ngày hết hạn</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="key-list-render">
+                        <!-- Dữ liệu render từ JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Quản Lý Key Chi Tiết -->
+    <div id="manageKeyModal" class="modal" style="display: none; align-items: center; justify-content: center;">
+        <div class="modal-content" style="max-width: 450px; margin: 0 auto;">
+            <span class="close-modal" onclick="closeManageModal()">&times;</span>
+            <h3 style="color: var(--accent-color); margin-bottom: 20px;"><i class="fas fa-cog fa-spin"></i> Quản Lý Key
+            </h3>
+
+            <div id="modal-key-info"
+                style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; margin-bottom: 20px; font-size: 0.9em; text-align: left;">
+                <!-- Thông tin key hiện tại render từ JS -->
+            </div>
+
+            <div class="manage-option" style="margin-bottom: 20px; text-align: left;">
+                <label style="display: block; margin-bottom: 10px; font-weight: 600; font-size: 0.9em;">Gia hạn thêm
+                    thời gian:</label>
+                <div style="display: flex; gap: 10px;">
+                    <select id="extend-time"
+                        style="flex: 1; background: rgba(0,0,0,0.2); border: 1px solid var(--border); padding: 10px; border-radius: 8px; color: white;">
+                        <option value="1">1 Giờ</option>
+                        <option value="24">1 Ngày</option>
+                        <option value="168">7 Ngày</option>
+                        <option value="720">30 Ngày</option>
+                        <option value="8760">1 Năm</option>
+                        <option value="999999">Vĩnh viễn (Lifetime)</option>
+                    </select>
+                    <button class="btn btn-primary" onclick="confirmRenew()">Xác nhận</button>
+                </div>
+            </div>
+
+            <div
+                style="display: flex; flex-direction: column; gap: 10px; border-top: 1px solid var(--border); padding-top: 20px; margin-top: 20px;">
+                <button class="btn"
+                    style="background: rgba(230, 126, 34, 0.2); color: #e67e22; border: 1px solid #e67e22; justify-content: center;"
+                    onclick="confirmCancelKey()">
+                    <i class="fas fa-ban"></i> Hủy kích hoạt (Hết hạn ngay)
+                </button>
+                <button class="btn btn-danger" style="justify-content: center;" onclick="confirmDeleteKey()">
+                    <i class="fas fa-trash-alt"></i> Xoá vĩnh viễn khỏi hệ thống
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/key.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+
+</html>

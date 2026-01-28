@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông Tin Cá Nhân</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="resources/verified.js"></script>
+</head>
+
+<body>
+
+    <!-- Theme Toggle Switch -->
+    <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" checked />
+            <div class="slider round">
+                <i class="fas fa-moon"></i>
+                <i class="fas fa-sun"></i>
+            </div>
+        </label>
+    </div>
+
+    <!-- Shooting Stars Background (Visible in Dark Mode) -->
+    <div class="night">
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+    </div>
+
+    <!-- Main Layout -->
+    <main class="portfolio-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-content">
+                <!-- Avatar Section -->
+                <div class="avatar-section">
+                    <div class="avatar-wrapper">
+                        <img src="resources/avt.png" alt="Avatar" class="avatar-img">
+                    </div>
+                </div>
+
+                <!-- Name & Title -->
+                <div class="name-section">
+                    <h1 class="profile-name blink-text">
+                        Phạm Quang Minh
+                        <img src="resources/tick_0.png" class="verified-tick-img" alt="verified">
+                    </h1>
+                    <span class="title-badge">Developer</span>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <div class="contact-item" onclick="toggleQR()">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <span class="contact-label">EMAIL</span>
+                            <a href="mailto:user.pqmdev@gmail.com">user.pqmdev@gmail.com</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <span class="contact-label">ZALO</span>
+                            <span class="contact-link" onclick="toggleQR()">0941138355</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <span class="contact-label">LOCATION</span>
+                            <span>Hàn Quốc</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- QR Code Container -->
+                <div id="qr-container">
+                    <p>Quét mã để kết bạn Zalo</p>
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://zalo.me/0941138355"
+                        alt="Zalo QR Code">
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Navigation Tabs -->
+            <nav class="nav-tabs">
+                <button class="nav-tab active" data-tab="about">About</button>
+                <button class="nav-tab" data-tab="skills">Skills</button>
+                <button class="nav-tab" data-tab="projects">Projects</button>
+                <button class="nav-tab" data-tab="payment">Payment</button>
+                <button class="nav-tab" data-tab="key">Key Check</button>
+            </nav>
+
+            <!-- Content Sections -->
+            <div class="content-wrapper">
+                <!-- About Section -->
+                <section id="about" class="content-section active">
+                    <h2 class="section-title">About Me</h2>
+                    <div class="section-divider"></div>
+
+                    <div class="about-text">
+                        <div id="typewriter-text"></div>
+                        <span class="typewriter-cursor">|</span>
+                    </div>
+
+                    <h3 class="subsection-title">My Skills</h3>
+                    <div class="skills-progress">
+                        <div class="skill-item" data-percent="96.69">
+                            <div class="skill-header">
+                                <span class="skill-name">Vibe Coding</span>
+                                <span class="skill-percent">0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item" data-percent="90">
+                            <div class="skill-header">
+                                <span class="skill-name">Web Design</span>
+                                <span class="skill-percent">0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item" data-percent="85">
+                            <div class="skill-header">
+                                <span class="skill-name">Backend Development</span>
+                                <span class="skill-percent">0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item" data-percent="80">
+                            <div class="skill-header">
+                                <span class="skill-name">Java Programming</span>
+                                <span class="skill-percent">0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item" data-percent="75">
+                            <div class="skill-header">
+                                <span class="skill-name">Database (MySQL/SQL Server)</span>
+                                <span class="skill-percent">0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item" data-percent="70">
+                            <div class="skill-header">
+                                <span class="skill-name">Game Development</span>
+                                <span class="skill-percent">0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Skills Section -->
+                <section id="skills" class="content-section">
+                    <h2 class="section-title">Kỹ năng lập trình</h2>
+                    <div class="section-divider"></div>
+
+                    <div class="skills-grid">
+                        <div class="skill-card">
+                            <div class="skill-card-icon">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <h3>Backend</h3>
+                            <ul>
+                                <li>PHP (PHPMailer, Web Admin)</li>
+                                <li>Node.js (API, Automation Tools)</li>
+                                <li>Java (Game Server, Swing GUI)</li>
+                            </ul>
+                        </div>
+
+                        <div class="skill-card">
+                            <div class="skill-card-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <h3>Database</h3>
+                            <ul>
+                                <li>MySQL</li>
+                                <li>SQL Server</li>
+                            </ul>
+                        </div>
+
+                        <div class="skill-card">
+                            <div class="skill-card-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <h3>Khác</h3>
+                            <ul>
+                                <li>Telegram Bot API</li>
+                                <li>Game Development (Làng Lá)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Projects Section -->
+                <section id="projects" class="content-section">
+                    <h2 class="section-title">Dự án tiêu biểu</h2>
+                    <div class="section-divider"></div>
+
+                    <div class="projects-list">
+                        <div class="project-card">
+                            <div class="project-icon">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <div class="project-info">
+                                <h3>Làng Lá Phiêu Lưu Ký</h3>
+                                <p>Phát triển Game Server, viết Tool Admin bằng Java Swing và hệ thống Backend quản lý.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="project-info">
+                                <h3>Automation Tools</h3>
+                                <p>Xây dựng các script Node.js hỗ trợ đăng ký tài khoản và gửi email tự động.</p>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-icon">
+                                <i class="fab fa-telegram"></i>
+                            </div>
+                            <div class="project-info">
+                                <h3>Telegram Bot</h3>
+                                <p>Phát triển các Telegram Bot hỗ trợ quản lý và tự động hóa công việc.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Key Check Section -->
+                <section id="key" class="content-section">
+                    <h2 class="section-title"><i class="fas fa-key"></i> Kiểm tra thời hạn Key</h2>
+                    <div class="section-divider"></div>
+
+                    <div class="key-checker-box">
+                        <p class="key-checker-desc">Nhập mã Key của bạn vào bên dưới để kiểm tra trạng thái và thời gian
+                            còn lại.</p>
+                        <div class="key-checker-form">
+                            <input type="text" id="check-key-input" placeholder="Ví dụ: PQM-XXXX..." class="key-input">
+                            <button class="btn btn-primary" onclick="checkKeyStatus()">
+                                <i class="fas fa-search"></i> Kiểm tra
+                            </button>
+                        </div>
+                        <div id="check-result" class="check-result">
+                            <!-- Kết quả hiển thị tại đây -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Payment Section -->
+                <section id="payment" class="content-section">
+                    <h2 class="section-title"><i class="fas fa-credit-card"></i> Payment</h2>
+                    <div class="section-divider"></div>
+
+                    <div class="payment-grid">
+                        <div class="payment-card">
+                            <div class="bank-info">
+                                <h3>MB BANK</h3>
+                                <p class="account-number">Số tài khoản: <strong>7977456789</strong></p>
+                                <p class="account-name">Chủ TK: PHAM QUANG MINH</p>
+                            </div>
+                            <button class="btn btn-copy" onclick="copyToClipboard('7977456789')">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+
+                        <div class="payment-card">
+                            <div class="bank-info">
+                                <h3>VIETCOMBANK</h3>
+                                <p class="account-number">Số tài khoản: <strong>1030983936</strong></p>
+                                <p class="account-name">Chủ TK: PHAM QUANG MINH</p>
+                            </div>
+                            <button class="btn btn-copy" onclick="copyToClipboard('1030983936')">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Hidden Admin Access -->
+    <div class="admin-btn" onclick="goToAdmin()">
+        <i class="fas fa-user-shield"></i>
+    </div>
+
+    <script>
+        // QR Code toggle
+        function toggleQR() {
+            var qr = document.getElementById("qr-container");
+            qr.style.display = (qr.style.display === "block") ? "none" : "block";
+        }
+
+        // Theme Switch Logic
+        const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+        const currentTheme = localStorage.getItem('theme');
+
+        if (currentTheme) {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            toggleSwitch.checked = (currentTheme === 'dark');
+        }
+
+        toggleSwitch.addEventListener('change', (e) => {
+            const theme = e.target.checked ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        }, false);
+
+        // Tab Navigation
+        const tabs = document.querySelectorAll('.nav-tab');
+        const sections = document.querySelectorAll('.content-section');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.dataset.tab;
+
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                sections.forEach(section => {
+                    section.classList.remove('active');
+                    if (section.id === target) {
+                        section.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        function goToAdmin() {
+            const pass = prompt("Nhập mật khẩu quản trị để truy cập trang quản lý:");
+
+            if (pass === null) return;
+
+            if (pass === "admin") {
+                window.location.href = "admin/login.html";
+            } else {
+                alert("Mật khẩu không chính xác!");
+            }
+        }
+
+        /* --- KEY CHECKER LOGIC --- */
+        function checkKeyStatus() {
+            const input = document.getElementById('check-key-input').value.trim();
+            const resultDiv = document.getElementById('check-result');
+
+            if (!input) {
+                alert("Vui lòng nhập mã Key!");
+                return;
+            }
+
+            const keys = JSON.parse(localStorage.getItem('sys_keys')) || [];
+            const foundKey = keys.find(k => k.code === input);
+
+            resultDiv.style.display = 'block';
+
+            if (foundKey) {
+                const now = Date.now();
+                const timeLeft = foundKey.expires - now;
+
+                if (timeLeft > 0) {
+                    const days = Math.floor(timeLeft / (24 * 3600000));
+                    const hours = Math.floor((timeLeft % (24 * 3600000)) / 3600000);
+                    const mins = Math.floor((timeLeft % 3600000) / 60000);
+
+                    let timeStr = "";
+                    if (foundKey.expires > 4000000000000) {
+                        timeStr = "Vĩnh viễn (∞)";
+                    } else {
+                        timeStr = `${days} ngày, ${hours} giờ, ${mins} phút`;
+                    }
+
+                    resultDiv.className = 'check-result success';
+                    resultDiv.innerHTML = `
+                        <div class="result-icon"><i class="fas fa-check-circle"></i></div>
+                        <div class="result-content">
+                            <div class="result-title">Key hợp lệ: ${foundKey.user}</div>
+                            <div class="result-info">Còn lại: <strong>${timeStr}</strong></div>
+                        </div>
+                    `;
+                } else {
+                    resultDiv.className = 'check-result error';
+                    resultDiv.innerHTML = `
+                        <div class="result-icon"><i class="fas fa-times-circle"></i></div>
+                        <div class="result-content">
+                            <div class="result-title">Key đã hết hạn</div>
+                            <div class="result-info">Vui lòng liên hệ Admin để gia hạn.</div>
+                        </div>
+                    `;
+                }
+            } else {
+                resultDiv.className = 'check-result warning';
+                resultDiv.innerHTML = `
+                    <div class="result-icon"><i class="fas fa-search"></i></div>
+                    <div class="result-content">
+                        <div class="result-title">Không tìm thấy Key này</div>
+                        <div class="result-info">Vui lòng kiểm tra lại mã hoặc liên hệ Admin.</div>
+                    </div>
+                `;
+            }
+        }
+
+        // Copy to clipboard
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Đã copy: ' + text);
+            });
+        }
+
+        // Skill Animation
+        function animateSkills() {
+            const skillItems = document.querySelectorAll('.skill-item[data-percent]');
+            skillItems.forEach((item, index) => {
+                const percent = parseFloat(item.dataset.percent);
+                const percentSpan = item.querySelector('.skill-percent');
+                const progressFill = item.querySelector('.progress-fill');
+
+                // Reset to 0 first
+                percentSpan.textContent = '0%';
+                progressFill.style.width = '0%';
+
+                setTimeout(() => {
+                    let current = 0;
+                    const duration = 1500;
+                    const steps = duration / 16;
+                    const increment = percent / steps;
+
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= percent) {
+                            current = percent;
+                            clearInterval(timer);
+                        }
+                        // Support decimal display
+                        if (percent % 1 !== 0) {
+                            percentSpan.textContent = current.toFixed(2) + '%';
+                        } else {
+                            percentSpan.textContent = Math.round(current) + '%';
+                        }
+                        progressFill.style.width = current + '%';
+                    }, 16);
+                }, index * 150);
+            });
+        }
+
+        // Run animation when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(animateSkills, 300);
+        });
+
+        // Re-animate when switching to About tab
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                if (tab.dataset.tab === 'about') {
+                    setTimeout(animateSkills, 200);
+                }
+            });
+        });
+
+        // Typewriter Effect
+        const aboutTexts = [
+            'Xin chào, mình là <strong>Phạm Quang Minh</strong>. Mình là một lập trình viên freelance với niềm đam mê mạnh mẽ về coding.',
+            'Sở thích của mình là phát triển game — một không gian nơi mình có thể tự do sáng tạo và khám phá.',
+            'Mình thích làm việc với nhiều ngôn ngữ lập trình như Java, PHP, Node.js và nhiều công nghệ khác.',
+            'Mình cũng là người thích suy nghĩ sâu sắc và kỹ lưỡng về mọi thứ mình làm.'
+        ];
+
+        let typewriterStarted = false;
+
+        function typeWriter() {
+            if (typewriterStarted) return;
+            typewriterStarted = true;
+
+            const container = document.getElementById('typewriter-text');
+            const cursor = document.querySelector('.typewriter-cursor');
+            container.innerHTML = '';
+
+            let textIndex = 0;
+            let charIndex = 0;
+            let currentP = null;
+            const speed = 30; // Typing speed in ms
+
+            function type() {
+                if (textIndex < aboutTexts.length) {
+                    const currentText = aboutTexts[textIndex];
+
+                    if (charIndex === 0) {
+                        currentP = document.createElement('p');
+                        container.appendChild(currentP);
+                    }
+
+                    if (charIndex < currentText.length) {
+                        // Handle HTML tags
+                        if (currentText[charIndex] === '<') {
+                            const closeTag = currentText.indexOf('>', charIndex);
+                            currentP.innerHTML += currentText.substring(charIndex, closeTag + 1);
+                            charIndex = closeTag + 1;
+                        } else {
+                            currentP.innerHTML += currentText[charIndex];
+                            charIndex++;
+                        }
+                        setTimeout(type, speed);
+                    } else {
+                        // Move to next paragraph
+                        textIndex++;
+                        charIndex = 0;
+                        setTimeout(type, 500); // Pause between paragraphs
+                    }
+                } else {
+                    // Typing complete - hide cursor after a delay
+                    setTimeout(() => {
+                        cursor.style.animation = 'none';
+                        cursor.style.opacity = '0';
+                    }, 2000);
+                    typewriterStarted = false;
+                }
+            }
+
+            type();
+        }
+
+        // Start typewriter when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(typeWriter, 500);
+        });
+
+        // Re-run typewriter when switching to About tab
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                if (tab.dataset.tab === 'about') {
+                    typewriterStarted = false;
+                    setTimeout(typeWriter, 200);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
