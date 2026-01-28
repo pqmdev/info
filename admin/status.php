@@ -1,7 +1,7 @@
 <?php
-/**
- * File này dùng để thống kê số lượng key mà không làm lộ mã key.
- */
+ // Share Source by PQM
+ // Tham gia giao lưu, trao đổi và hỗ trợ tại Discord:
+ // https://discord.gg/Bjb7EvsA 
 
 $storage_file = 'data_keys_secure.json';
 
