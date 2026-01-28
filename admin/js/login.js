@@ -3,8 +3,11 @@ function handleLogin() {
     const pass = document.getElementById('password').value;
     const error = document.getElementById('error');
 
-    const hashedPassword = md5(pass);
-    if (user === 'admin' && hashedPassword === '823f4cfe556f95863e2df595c02b432f') {
+
+    const salt = "@pqm_secret_key_2024!";
+    const hashedPassword = CryptoJS.SHA256(pass + salt).toString();
+
+    if (user === 'admin' && hashedPassword === '7967912066fa4932a9cd772ef9e36585149303d779893d7715f33331bba98e3b') {
         sessionStorage.setItem('admin_logged_in', 'true');
         window.location.href = 'index.html';
     } else {
