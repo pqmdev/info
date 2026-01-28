@@ -4,10 +4,10 @@ function handleLogin() {
     const error = document.getElementById('error');
 
 
-    const salt = "@pqm_secret_key_2024!";
+    const salt = "keyadmin";
     const hashedPassword = CryptoJS.SHA256(pass + salt).toString();
 
-    if (user === 'admin' && hashedPassword === '7967912066fa4932a9cd772ef9e36585149303d779893d7715f33331bba98e3b') {
+    if (user === 'admin' && hashedPassword === '4373bca83929a8f056018aa169bc7226c43c61990b217edd821444b7a11188a2') {
         sessionStorage.setItem('admin_logged_in', 'true');
         window.location.href = 'index.html';
     } else {
